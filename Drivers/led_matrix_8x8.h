@@ -14,7 +14,7 @@
 #define SHIFT_REG_X 0x01
 #define SHIFT_REG_Y 0x02
 
-#define GROUND_PORT PORTC;
+#define PORT_GND PORTC
 
 //unsigned char x_axis;
 //unsigned char y_axis;
@@ -23,7 +23,7 @@
 void LEDMatrix8x8_init() {
     SPI_MasterInit();
     DDRC = 0xFF; PORTC = 0x00; //Initialize PORTC for output
-    
+    DDRD = 0xFF; PORTD = 0x00; //TEMP
     //x_axis = 0x00;
     //y_axis = 0x00;
     
@@ -64,7 +64,9 @@ void LEDMatrix8x8_display() {
 
 void LEDMatrix8x8_display(unsigned char x, unsigned char y) {
     SPI_Transmit(x);
-    GROUND_PORT = ~y;
+    //PORT_GND = ~y;
+    PORTC = 0x00;
+    PORTD = 0xFF;
     
     return;
 }

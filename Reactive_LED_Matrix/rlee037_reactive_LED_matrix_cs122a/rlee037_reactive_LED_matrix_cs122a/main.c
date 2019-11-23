@@ -35,7 +35,7 @@ int main(void) {
     ++i;
     
     TimerSet(GLOBAL_PERIOD);
-    TimerOn();
+    //TimerOn();
     
     while (1) {}
     

@@ -13,7 +13,7 @@ main.d main.o: .././main.c \
  .././timer_functions.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  .././periods.h ../../../../Includes/scheduler.h \
- .././reactive_led_matrix_sm.h ../../../../Drivers/mux_8x1.h \
+ .././reactive_led_matrix_sm.h ../../../../Includes/usart_ATmega1284.h \
  ../../../../Drivers/led_matrix_8x8.h ../../../../Includes/spi.h
 
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -48,7 +48,7 @@ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\i
 
 .././reactive_led_matrix_sm.h:
 
-../../../../Drivers/mux_8x1.h:
+../../../../Includes/usart_ATmega1284.h:
 
 ../../../../Drivers/led_matrix_8x8.h:
 

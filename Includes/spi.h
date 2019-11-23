@@ -53,24 +53,11 @@ void SPI_ServantInit(void) {
     return;
 }
 
-void SPI_Transmit(unsigned char data, unsigned char channel) {
-    if (channel & 0x01) {
-        SERVANT_SELECT1;
-    } else if (channel & 0x02) {
-        SERVANT_SELECT2;
-    }
-    
+void SPI_Transmit(unsigned char data) {
     //Start transmission
     SPDR = data;
     //wait for transmission to complete
     while(!(SPSR & (1 << SPIF))) {}
-    
-    
-    if (channel & 0x01) {
-        SERVANT_DESELECT1;
-    } else if (channel & 0x02) {
-        SERVANT_DESELECT2;
-    }
     
     return;
 }

@@ -54,8 +54,8 @@ enum Coordinate_states{INIT_COORDINATE, CALCULATE_COORDINATE}Coordinate_state;
 int Tick_Coordinate(int state) { // Get sensor input & puck position to create output
     switch (state) { //transitions
         case INIT_COORDINATE:
-            x_output = 0x00;
-            y_output = 0x00;
+            output_x = 0x00;
+            output_y = 0x00;
             state = CALCULATE_COORDINATE;
             break;
         case CALCULATE_COORDINATE:
@@ -68,15 +68,15 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
     
     switch (state) { //actions
         case INIT_COORDINATE:
-            x_output = 0x00;
-            y_output = 0x00;
+            output_x = 0x00;
+            output_y = 0x00;
             break;
         case CALCULATE_COORDINATE:
             
             break;
         default:
-            x_output = 0x00;
-            y_output = 0x00;
+            output_x = 0x00;
+            output_y = 0x00;
             break;
     }
     
@@ -105,7 +105,7 @@ int Tick_LED8x8(int state) {
             break;
         case DISPLAY_LED8x8:
             //LEDMatrix8x8_display(output_x, output_y);
-            LEDMatrix8x8_display(0x07, 0x07);
+            LEDMatrix8x8_display(0xFF, 0xFF);
             break;
         default:
             // do nothing
