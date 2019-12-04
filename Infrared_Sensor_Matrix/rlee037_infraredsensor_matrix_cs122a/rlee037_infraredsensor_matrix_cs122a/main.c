@@ -13,12 +13,30 @@
 
 #include <avr/io.h>
 
+#include "sensor_matrix_8x8.h"
 
 int main(void)
 {
-    /* Replace with your application code */
-    while (1) 
-    {
+    DDRD = 0xFF; PORTD = 0x00;
+    //SensorMatrix_init();
+    
+    //unsigned char inputs[8] = {0x00};
+    
+    ADC_init();
+    
+    while (1) {
+        PORTD = 0x00;
+        PORTD = ADC_read(0);
+        //SensorMatrix_getInput(inputs);
+        /*
+        for (unsigned char i = 0; i < 8; ++i) {
+			if (inputs[i] != 0) {
+                PORTD |= (1 << i);
+            } else {
+                PORTD &= ~(1 << i);
+            }
+        }
+        */
     }
 }
 

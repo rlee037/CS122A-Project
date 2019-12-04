@@ -1,39 +1,48 @@
 /*
- *
+ *   Address and get input from up to an 8x8 matrix of QRD1114 Optical Detectors
+ *   PINS ON SENSOR (https://learn.sparkfun.com/tutorials/qrd1114-optical-detector-hookup-guide)
+ *    Pin 1: Connect to power through a 10k Ohm resistor. This pin also functions as the output of the sensor (connect to ADC input pin). Has dot on sensor.
+ *    Pin 2: GND (on white side)
+ *    Pin 3: VCC (connect to output pin). 
+ *    Pin 4: GND (on black side, opposite of pin 1)
  */
 
 #ifndef _SENSOR_MATRIX_H_
 #define _SENSOR_MATRIX_H_
 
-#include "spi.h"
+#include "adc.h"
 
-#define DDR_INPUT  DDRA
-#define PORT_INPUT PORTA
-#define PIN_INPUT  PINA
-#define DDR_POWER  DDRC
-#define PORT_POWER PORTC
+//Controls which row gets read as input
+#define DDR_CONTROL  DDRB
+#define PORT_CONTROL PORTB
 
 void SensorMatrix_init() {
-    DDR_INPUT = 0x00; PORT_INPUT = 0xFF; //Initialize for input
-    DDR_POWER = 0xFF; PORT_POWER = 0x00; //Initialize for output
+    DDR_CONTROL = 0xFF; PORT_CONTROL = 0x00; //Initialize to output
     
+    ADC_init();
+    ADC_on();
     return;
 }
 
-unsigned short SensorMatrix_getInput() {
-    unsigned char  x      = 0x00;
-    unsigned char  y      = 0x00;
-    unsigned short output = 0x0000;
-    
-    for (unsigned int i = 0; i < 8; ++i) {
-        PORT_POWER = (1 << i);
-        if (~PIN_INPUT) {
-            y |= (1 << i);
+void SensorMatrix_getInput(unsigned char positions[]) { //position array should always contain 8 chars
+    /*
+    for (unsigned char i = 0; i < 8; ++i) {
+        PORT_CONTROL = (1 << i);
+        for (unsigned char j = 0; j < 8; ++j) {
+            if (ADC_read(j) < 100) {
+                positions[i] |= (1 << j);
+            } else {
+                positions[i] &= ~(1 << j);
+            }
         }
-        x |= ~PIN_INPUT;
     }
+    */
     
-    return out;
+    PORTD = 0x00;
+    unsigned char read = ADC_read(0) >> 2;
+    if (read != 0xFF) {PORTD = read;}
+    
+    return;
 }
 
 #endif

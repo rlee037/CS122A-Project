@@ -9,7 +9,7 @@
 #ifndef _ANALOG_TO_DIGITAL_CONVERTER_H_
 #define _ANALOG_TO_DIGITAL_CONVERTER_H_
 
-#define ADC_PORT PORTA
+#define PORT_ADC PORTA
 
 void ADC_init(void) {
     ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE);
@@ -18,6 +18,7 @@ void ADC_init(void) {
     // ADATE: setting this bit enables auto-triggering. Since we are
     //        in Free Running Mode, a new conversion will trigger whenever
     //        the previous conversion completes.
+    
     return;
 }
 
@@ -30,7 +31,9 @@ unsigned char ADC_read(unsigned char channel) {
     
     ADCSRA |= (1 << ADIF);             //clear ADIF by writing 1
     
-    return (ADC);
+    ADMUX = 0x00;
+    
+    return ADC;
 }
 
 void ADC_on(void) {

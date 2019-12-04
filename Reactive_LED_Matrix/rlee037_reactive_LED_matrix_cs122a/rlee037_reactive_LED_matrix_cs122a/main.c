@@ -16,6 +16,8 @@
 #include "timer_functions.h"
 #include "reactive_led_matrix_sm.h"
 
+#include "io.h"
+
 int main(void) {
     DDRA = 0x00; PORTA = 0xFF; //Initialize PORTA for input
     DDRD = 0xFF; PORTD = 0x00; //Initialize PORTD for output
@@ -33,6 +35,13 @@ int main(void) {
     tasks[i].active      = 0x01;
     tasks[i].TickFct     = &Tick_LED8x8;
     ++i;
+	
+	DDRC = 0xFF; PORTC = 0x00;
+	
+    LCD_init();
+    LCD_BacklightOn();
+	LCD_Cursor(5);
+    LCD_WriteData('a');
     
     TimerSet(GLOBAL_PERIOD);
     //TimerOn();

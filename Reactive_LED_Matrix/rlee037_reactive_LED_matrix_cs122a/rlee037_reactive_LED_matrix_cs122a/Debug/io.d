@@ -1,4 +1,4 @@
-main.d main.o: .././main.c \
+io.d io.o: .././io.c \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -10,11 +10,10 @@ main.d main.o: .././main.c \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././timer_functions.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././periods.h ../../../../Includes/scheduler.h \
- .././reactive_led_matrix_sm.h ../../../../Includes/usart_ATmega1284.h \
- ../../../../Drivers/led_matrix_8x8.h ../../../../Includes/spi.h \
+ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
+ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
+ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../../../../Includes/io.h
 
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -39,20 +38,12 @@ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\f
 
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-.././timer_functions.h:
-
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
-.././periods.h:
+d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
-../../../../Includes/scheduler.h:
+d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
-.././reactive_led_matrix_sm.h:
-
-../../../../Includes/usart_ATmega1284.h:
-
-../../../../Drivers/led_matrix_8x8.h:
-
-../../../../Includes/spi.h:
+d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 ../../../../Includes/io.h:

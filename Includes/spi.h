@@ -6,7 +6,7 @@
  *     MOSI (PB5) | User Defined       | Input
  *     MISO (PB6) | Input              | User Defined
  *     SCK  (PB7) | User Defined       | Input
- *     SS   (PB4) | User Defined       | Input\
+ *     SS   (PB4) | User Defined       | Input
  *
  *   UNCHECK CLKDIV8 FUSE WHEN PROGRAMMING
  * 
@@ -17,8 +17,7 @@
 
 #include <avr/interrupt.h>
 
-#define SS1  3
-#define SS2  4
+#define SS   4
 #define MOSI 5
 #define MISO 6
 #define SCK  7
@@ -26,10 +25,8 @@
 #define DDR_SPI  DDRB
 #define PORT_SPI PORTB
 
-#define SERVANT_SELECT1   PORT_SPI &= ~(1 << SS1)
-#define SERVANT_DESELECT1 PORT_SPI |= (1 << SS1)
-#define SERVANT_SELECT2   PORT_SPI &= ~(1 << SS2)
-#define SERVANT_DESELECT2 PORT_SPI |= (1 << SS2)
+#define SERVANT_SELECT   PORT_SPI &= ~(1 << SS)
+#define SERVANT_DESELECT PORT_SPI |=  (1 << SS)
 
 void SPI_MasterInit(void) {
     // Set MOSI and SCK as output, all others as input
@@ -58,6 +55,9 @@ void SPI_Transmit(unsigned char data) {
     SPDR = data;
     //wait for transmission to complete
     while(!(SPSR & (1 << SPIF))) {}
+    
+    SERVANT_SELECT;
+    SERVANT_DESELECT;
     
     return;
 }

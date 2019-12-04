@@ -6,13 +6,14 @@
 #include "usart_ATmega1284.h"
 #include "led_matrix_8x8.h"
 
+#include "shift_register.h"
+
 unsigned char sensor_x;
 unsigned char sensor_y;
 unsigned char output_x;
 unsigned char output_y;
-//unsigned char  PUCK_x;
-//unsigned char  PUCK_y;
-
+unsigned char PUCK_x;
+unsigned char PUCK_y;
 
 enum Sensor_states{INIT_SENSOR, READ_SENSOR}Sensor_state;
 int Tick_Sensor(int state) { //Get input from sensors through USART
@@ -37,8 +38,8 @@ int Tick_Sensor(int state) { //Get input from sensors through USART
             sensor_y = 0x00;
             break;
         case READ_SENSOR:
-            sensor_x = USART_Receive(0);
-            sensor_y = USART_Receive(0);
+            //sensor_x = USART_Receive(0);
+            //sensor_y = USART_Receive(0);
             break;
         default:
             sensor_x = 0x00;
@@ -49,9 +50,52 @@ int Tick_Sensor(int state) { //Get input from sensors through USART
     return state;
 }
 
+//0x00: no shift
+//0x01: shift left
+//0x02: shift right
+void move(int x, int y) {
+    switch (x) {
+        case 0x00: //do nothing
+            break;
+        case 0x01:
+            if (!(PUCK_x & 0x80)) {
+                PUCK_x = PUCK_x << 1;
+            }
+            break;
+        case 0x02:
+            if (!(PUCK_x & 0x01)) {
+                PUCK_x = PUCK_x >> 1;
+            }
+            break;
+        default: //do nothing
+            break;
+    }
+    
+    switch (y) {
+        case 0x00: //do nothing
+            break;
+        case 0x01:
+            if (!(PUCK_x & 0x80)) {
+                PUCK_x = PUCK_y << 1;
+            }
+            break;
+        case 0x02:
+            if (!(PUCK_x & 0x01)) {
+                PUCK_x = PUCK_y >> 1;
+            }
+            break;
+        default: //do nothing
+            break;
+    }
+    
+    return;
+}
 
 enum Coordinate_states{INIT_COORDINATE, CALCULATE_COORDINATE}Coordinate_state;
 int Tick_Coordinate(int state) { // Get sensor input & puck position to create output
+    static unsigned char prev_x;
+    static unsigned char prev_y;
+    
     switch (state) { //transitions
         case INIT_COORDINATE:
             output_x = 0x00;
@@ -73,6 +117,8 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
             break;
         case CALCULATE_COORDINATE:
             
+            prev_x = PUCK_x;
+            prev_y = PUCK_y;
             break;
         default:
             output_x = 0x00;
@@ -82,7 +128,6 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
     
     return state;
 }
-
 
 enum LED8x8_states{INIT_LED8x8, DISPLAY_LED8x8}LEDMatrix8x8_state;
 int Tick_LED8x8(int state) {
@@ -104,8 +149,9 @@ int Tick_LED8x8(int state) {
             LEDMatrix8x8_init();
             break;
         case DISPLAY_LED8x8:
+            
             //LEDMatrix8x8_display(output_x, output_y);
-            LEDMatrix8x8_display(0xFF, 0xFF);
+            //LEDMatrix8x8_display(0xFF, 0xFF);
             break;
         default:
             // do nothing

@@ -10,12 +10,7 @@ main.d main.o: .././main.c \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././timer_functions.h \
- d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././periods.h ../../../../Includes/scheduler.h \
- .././reactive_led_matrix_sm.h ../../../../Includes/usart_ATmega1284.h \
- ../../../../Drivers/led_matrix_8x8.h ../../../../Includes/spi.h \
- ../../../../Includes/io.h
+ ../../../../Drivers/sensor_matrix_8x8.h ../../../../Includes/adc.h
 
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -39,20 +34,6 @@ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\f
 
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-.././timer_functions.h:
+../../../../Drivers/sensor_matrix_8x8.h:
 
-d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
-
-.././periods.h:
-
-../../../../Includes/scheduler.h:
-
-.././reactive_led_matrix_sm.h:
-
-../../../../Includes/usart_ATmega1284.h:
-
-../../../../Drivers/led_matrix_8x8.h:
-
-../../../../Includes/spi.h:
-
-../../../../Includes/io.h:
+../../../../Includes/adc.h:
