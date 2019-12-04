@@ -8,11 +8,11 @@
 //Shift register macros
 #define SR_DDR     DDRB
 #define SHIFT_REG  PORTB //shift register port; numbers in macros below indicate pin
-#define SER        0     //set SER = next bit of data to be sent
+#define SER        5//0     //set SER = next bit of data to be sent
 #define OE         1     //enable output when set low, disable when high
-#define RCLK       2     //shift register transferred to storage register when set to 1
-#define SRCLK      3     //clear before sending data
-#define SRCLR      4     //allows data to be set when 1
+#define RCLK       4//2     //shift register transferred to storage register when set to 1
+#define SRCLK      7//3     //clear before sending data
+#define SRCLR      1//4     //allows data to be set when 1
 
 #define reg_8 unsigned char
 

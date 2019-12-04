@@ -3,11 +3,12 @@
 
 #include "scheduler.h"
 
-#define GLOBAL_PERIOD 50  //ms
-#define SENSOR_PERIOD 100 //ms
-#define LED8x8_PERIOD 100 //ms
+#define GLOBAL_PERIOD     50  //ms
+#define SENSOR_PERIOD     100 //ms
+#define COORDINATE_PERIOD 200 //ms
+#define LED8x8_PERIOD     100 //ms
 
-#define NUM_TASKS 2
+#define NUM_TASKS 3
 
 task tasks[NUM_TASKS];
 

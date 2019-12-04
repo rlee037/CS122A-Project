@@ -14,8 +14,8 @@ main.d main.o: .././main.c \
  d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  .././periods.h ../../../../Includes/scheduler.h \
  .././reactive_led_matrix_sm.h ../../../../Includes/usart_ATmega1284.h \
- ../../../../Drivers/led_matrix_8x8.h ../../../../Includes/spi.h \
- ../../../../Includes/io.h
+ ../../../../Drivers/led_matrix_8x8_port.h \
+ ../../../../Includes/shift_register.h ../../../../Includes/io.h
 
 d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -51,8 +51,8 @@ d:\programs\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\i
 
 ../../../../Includes/usart_ATmega1284.h:
 
-../../../../Drivers/led_matrix_8x8.h:
+../../../../Drivers/led_matrix_8x8_port.h:
 
-../../../../Includes/spi.h:
+../../../../Includes/shift_register.h:
 
 ../../../../Includes/io.h:

@@ -4,7 +4,8 @@
 //#include "mux_8x1.h"
 //#include "input_matrix_8x8.h"
 #include "usart_ATmega1284.h"
-#include "led_matrix_8x8.h"
+//#include "led_matrix_8x8.h"
+#include "led_matrix_8x8_port.h"
 
 #include "shift_register.h"
 
@@ -33,7 +34,7 @@ int Tick_Sensor(int state) { //Get input from sensors through USART
     
     switch (state) { //actions
         case INIT_SENSOR:
-            initUSART(0);
+            //initUSART(0);
             sensor_x = 0x00;
             sensor_y = 0x00;
             break;
@@ -96,10 +97,15 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
     static unsigned char prev_x;
     static unsigned char prev_y;
     
+    static unsigned char temp; //TEST
+    
     switch (state) { //transitions
         case INIT_COORDINATE:
+            PUCK_x = 0x01;
+            PUCK_y = 0x01;
             output_x = 0x00;
             output_y = 0x00;
+            temp = 0;
             state = CALCULATE_COORDINATE;
             break;
         case CALCULATE_COORDINATE:
@@ -116,9 +122,14 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
             output_y = 0x00;
             break;
         case CALCULATE_COORDINATE:
-            
+            if (temp < 8) {
+                ++temp;
+            } else {temp = 0;}
+            output_x = 0xFF;//PUCK_x << temp;
+            output_y = PUCK_y << temp;
             prev_x = PUCK_x;
             prev_y = PUCK_y;
+            if (prev_x | prev_y) {}
             break;
         default:
             output_x = 0x00;
@@ -135,6 +146,7 @@ int Tick_LED8x8(int state) {
         case INIT_LED8x8:
             state = DISPLAY_LED8x8;
             LEDMatrix8x8_init();
+            ShiftReg_init();
             break;
         case DISPLAY_LED8x8:
             // stay in this state to continuously output to 8x8 LED matrix
@@ -149,9 +161,7 @@ int Tick_LED8x8(int state) {
             LEDMatrix8x8_init();
             break;
         case DISPLAY_LED8x8:
-            
-            //LEDMatrix8x8_display(output_x, output_y);
-            //LEDMatrix8x8_display(0xFF, 0xFF);
+            LEDMatrix8x8_display(output_x, output_y);
             break;
         default:
             // do nothing

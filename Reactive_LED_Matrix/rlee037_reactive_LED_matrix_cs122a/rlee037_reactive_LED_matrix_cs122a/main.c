@@ -19,8 +19,6 @@
 #include "io.h"
 
 int main(void) {
-    DDRA = 0x00; PORTA = 0xFF; //Initialize PORTA for input
-    DDRD = 0xFF; PORTD = 0x00; //Initialize PORTD for output
     
     unsigned char i = 0;
     tasks[i].state       = INIT_SENSOR;
@@ -29,22 +27,21 @@ int main(void) {
     tasks[i].active      = 0x01;
     tasks[i].TickFct     = &Tick_Sensor;
     ++i;
+    tasks[i].state       = INIT_COORDINATE;
+    tasks[i].period      = COORDINATE_PERIOD;
+    tasks[i].elapsedTime = 0;
+    tasks[i].active      = 0x01;
+    tasks[i].TickFct     = &Tick_Coordinate;
+    ++i;
     tasks[i].state       = INIT_LED8x8;
     tasks[i].period      = LED8x8_PERIOD;
     tasks[i].elapsedTime = 0;
     tasks[i].active      = 0x01;
     tasks[i].TickFct     = &Tick_LED8x8;
     ++i;
-	
-	DDRC = 0xFF; PORTC = 0x00;
-	
-    LCD_init();
-    LCD_BacklightOn();
-	LCD_Cursor(5);
-    LCD_WriteData('a');
     
     TimerSet(GLOBAL_PERIOD);
-    //TimerOn();
+    TimerOn();
     
     while (1) {}
     

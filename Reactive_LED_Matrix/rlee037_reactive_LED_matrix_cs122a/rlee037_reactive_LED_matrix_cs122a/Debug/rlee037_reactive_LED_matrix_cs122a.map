@@ -15,7 +15,7 @@ Common symbol       size              file
 output_y            0x1               main.o
 PUCK_x              0x1               main.o
 LEDMatrix8x8_state  0x1               main.o
-tasks               0x18              main.o
+tasks               0x24              main.o
 output_x            0x1               main.o
 sensor_y            0x1               main.o
 Coordinate_state    0x1               main.o
@@ -30,19 +30,42 @@ Discarded input sections
  .text          0x00000000        0x0 io.o
  .data          0x00000000        0x0 io.o
  .bss           0x00000000        0x0 io.o
+ .text.LCD_BacklightOn
+                0x00000000        0x4 io.o
  .text.LCD_BacklightOff
                 0x00000000        0x4 io.o
+ .text.delay_ms
+                0x00000000       0x26 io.o
+ .text.LCD_WriteCommand
+                0x00000000       0x14 io.o
  .text.LCD_ClearScreen
                 0x00000000        0x8 io.o
+ .text.LCD_Cursor
+                0x00000000       0x14 io.o
+ .text.LCD_init
+                0x00000000       0x2a io.o
+ .text.LCD_WriteData
+                0x00000000       0x14 io.o
  .text.LCD_DisplayString
                 0x00000000       0x38 io.o
+ .debug_info    0x00000000      0x2ee io.o
+ .debug_abbrev  0x00000000       0xf1 io.o
+ .debug_loc     0x00000000      0x21a io.o
+ .debug_aranges
+                0x00000000       0x60 io.o
+ .debug_ranges  0x00000000       0x50 io.o
+ .debug_line    0x00000000      0x200 io.o
+ .debug_str     0x00000000      0x26e io.o
+ .comment       0x00000000       0x31 io.o
+ .debug_frame   0x00000000       0xb8 io.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text.findGCD  0x00000000       0x5a main.o
- .text.TimerOn  0x00000000       0x48 main.o
  .text.TimerOff
                 0x00000000        0x6 main.o
+ .text.initUSART
+                0x00000000       0x44 main.o
  .text.USART_IsSendReady
                 0x00000000       0x14 main.o
  .text.USART_HasTransmitted
@@ -55,15 +78,15 @@ Discarded input sections
                 0x00000000       0x24 main.o
  .text.USART_Receive
                 0x00000000       0x24 main.o
- .text.SPI_ServantInit
-                0x00000000        0xa main.o
- .text.SPI_Receive
-                0x00000000        0xa main.o
  .text.LEDMatrix8x8_display
-                0x00000000        0xc main.o
+                0x00000000        0x8 main.o
+ .text.enableOutputSR
+                0x00000000        0x4 main.o
+ .text.disableOutputSR
+                0x00000000        0x4 main.o
+ .text.ShiftReg_transmit
+                0x00000000       0x36 main.o
  .text.move     0x00000000       0x70 main.o
- .text.Tick_Coordinate
-                0x00000000       0x28 main.o
  .bss.TimerFlag
                 0x00000000        0x1 main.o
  .text          0x00000000        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_udivmodsi4.o)
@@ -258,7 +281,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x3ac
+.text           0x00000000      0x39c
  *(.vectors)
  .vectors       0x00000000       0x8c D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
                 0x00000000                __vector_default
@@ -353,58 +376,39 @@ END GROUP
                 0x000000c6                __vector_20
                 0x000000c8                . = ALIGN (0x2)
  *(.text.*)
- .text.LCD_BacklightOn
-                0x000000c8        0x4 io.o
-                0x000000c8                LCD_BacklightOn
- .text.delay_ms
-                0x000000cc       0x26 io.o
-                0x000000cc                delay_ms
- .text.LCD_WriteCommand
-                0x000000f2       0x12 io.o
-                0x000000f2                LCD_WriteCommand
- .text.LCD_Cursor
-                0x00000104       0x10 io.o
-                0x00000104                LCD_Cursor
- .text.LCD_init
-                0x00000114       0x1e io.o
-                0x00000114                LCD_init
- .text.LCD_WriteData
-                0x00000132       0x12 io.o
-                0x00000132                LCD_WriteData
- .text.TimerISR
-                0x00000144       0x84 main.o
-                0x00000144                TimerISR
- .text.__vector_13
-                0x000001c8       0x9c main.o
-                0x000001c8                __vector_13
- .text.TimerSet
-                0x00000264       0x22 main.o
-                0x00000264                TimerSet
- .text.initUSART
-                0x00000286       0x44 main.o
-                0x00000286                initUSART
  .text.Tick_Sensor
-                0x000002ca       0x2c main.o
-                0x000002ca                Tick_Sensor
- .text.SPI_MasterInit
-                0x000002f6        0xa main.o
-                0x000002f6                SPI_MasterInit
- .text.SPI_Transmit
-                0x00000300        0xe main.o
-                0x00000300                SPI_Transmit
+                0x000000c8       0x28 main.o
+                0x000000c8                Tick_Sensor
+ .text.Tick_Coordinate
+                0x000000f0       0x66 main.o
+                0x000000f0                Tick_Coordinate
+ .text.TimerOn  0x00000156       0x48 main.o
+                0x00000156                TimerOn
+ .text.TimerISR
+                0x0000019e       0x84 main.o
+                0x0000019e                TimerISR
+ .text.__vector_13
+                0x00000222       0x9c main.o
+                0x00000222                __vector_13
+ .text.TimerSet
+                0x000002be       0x22 main.o
+                0x000002be                TimerSet
  .text.LEDMatrix8x8_init
-                0x0000030e        0xe main.o
-                0x0000030e                LEDMatrix8x8_init
+                0x000002e0        0xc main.o
+                0x000002e0                LEDMatrix8x8_init
+ .text.ShiftReg_init
+                0x000002ec        0x8 main.o
+                0x000002ec                ShiftReg_init
  .text.Tick_LED8x8
-                0x0000031c       0x20 main.o
-                0x0000031c                Tick_LED8x8
- .text.main     0x0000033c       0x6c main.o
-                0x0000033c                main
-                0x000003a8                . = ALIGN (0x2)
+                0x000002f4       0x2c main.o
+                0x000002f4                Tick_LED8x8
+ .text.main     0x00000320       0x78 main.o
+                0x00000320                main
+                0x00000398                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000003a8        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
-                0x000003a8                _exit
-                0x000003a8                exit
+ .fini9         0x00000398        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
+                0x00000398                _exit
+                0x00000398                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -423,11 +427,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000003a8        0x4 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
+ .fini0         0x00000398        0x4 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
  *(.fini0)
-                0x000003ac                _etext = .
+                0x0000039c                _etext = .
 
-.data           0x00800100        0x4 load address 0x000003ac
+.data           0x00800100        0x4 load address 0x0000039c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -442,34 +446,36 @@ END GROUP
                 0x00800104                _edata = .
                 0x00800104                PROVIDE (__data_end, .)
 
-.bss            0x00800104       0x25
+.bss            0x00800104       0x32
                 0x00800104                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
+ .bss.temp.1741
+                0x00800104        0x1 main.o
  .bss._avr_timer_cntcurr
-                0x00800104        0x4 main.o
-                0x00800104                _avr_timer_cntcurr
+                0x00800105        0x4 main.o
+                0x00800105                _avr_timer_cntcurr
  *(COMMON)
- COMMON         0x00800108       0x21 main.o
-                0x00800108                output_y
-                0x00800109                PUCK_x
-                0x0080010a                LEDMatrix8x8_state
-                0x0080010b                tasks
-                0x00800123                output_x
-                0x00800124                sensor_y
-                0x00800125                Coordinate_state
-                0x00800126                Sensor_state
-                0x00800127                PUCK_y
-                0x00800128                sensor_x
-                0x00800129                PROVIDE (__bss_end, .)
-                0x000003ac                __data_load_start = LOADADDR (.data)
-                0x000003b0                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800109       0x2d main.o
+                0x00800109                output_y
+                0x0080010a                PUCK_x
+                0x0080010b                LEDMatrix8x8_state
+                0x0080010c                tasks
+                0x00800130                output_x
+                0x00800131                sensor_y
+                0x00800132                Coordinate_state
+                0x00800133                Sensor_state
+                0x00800134                PUCK_y
+                0x00800135                sensor_x
+                0x00800136                PROVIDE (__bss_end, .)
+                0x0000039c                __data_load_start = LOADADDR (.data)
+                0x000003a0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800129        0x0
+.noinit         0x00800136        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800129                _end = .
+                0x00800136                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -511,9 +517,8 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 io.o
+ .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 main.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -535,51 +540,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x138
+.debug_aranges  0x00000000       0xd8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x60 io.o
- .debug_aranges
-                0x00000060       0xd8 main.o
+                0x00000000       0xd8 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1196
+.debug_info     0x00000000      0xe6b
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x792 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_info    0x00000792      0x2ee io.o
- .debug_info    0x00000a80      0x716 main.o
+ .debug_info    0x00000792      0x6d9 main.o
 
-.debug_abbrev   0x00000000      0xa6c
+.debug_abbrev   0x00000000      0x981
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x729 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_abbrev  0x00000729       0xf1 io.o
- .debug_abbrev  0x0000081a      0x252 main.o
+ .debug_abbrev  0x00000729      0x258 main.o
 
-.debug_line     0x00000000      0x9db
+.debug_line     0x00000000      0x805
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x169 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_line    0x00000169      0x200 io.o
- .debug_line    0x00000369      0x672 main.o
+ .debug_line    0x00000169      0x69c main.o
 
-.debug_frame    0x00000000      0x2c8
+.debug_frame    0x00000000      0x210
  *(.debug_frame)
- .debug_frame   0x00000000       0xb8 io.o
- .debug_frame   0x000000b8      0x210 main.o
+ .debug_frame   0x00000000      0x210 main.o
 
-.debug_str      0x00000000      0x776
+.debug_str      0x00000000      0x6e3
  *(.debug_str)
  .debug_str     0x00000000      0x296 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_str     0x00000296      0x228 io.o
-                                0x26e (size before relaxing)
- .debug_str     0x000004be      0x2b8 main.o
-                                0x4b2 (size before relaxing)
+ .debug_str     0x00000296      0x44d main.o
+                                0x48c (size before relaxing)
 
-.debug_loc      0x00000000      0x79b
+.debug_loc      0x00000000      0x5ee
  *(.debug_loc)
- .debug_loc     0x00000000      0x21a io.o
- .debug_loc     0x0000021a      0x581 main.o
+ .debug_loc     0x00000000      0x5ee main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -599,10 +595,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x118
+.debug_ranges   0x00000000       0xc8
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x50 io.o
- .debug_ranges  0x00000050       0xc8 main.o
+ .debug_ranges  0x00000000       0xc8 main.o
 
 .debug_macro
  *(.debug_macro)
