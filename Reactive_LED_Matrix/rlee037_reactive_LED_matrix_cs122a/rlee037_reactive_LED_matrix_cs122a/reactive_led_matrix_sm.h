@@ -76,13 +76,13 @@ void move(int x, int y) {
         case 0x00: //do nothing
             break;
         case 0x01:
-            if (!(PUCK_x & 0x80)) {
-                PUCK_x = PUCK_y << 1;
+            if (!(PUCK_y & 0x80)) {
+                PUCK_y = PUCK_y << 1;
             }
             break;
         case 0x02:
-            if (!(PUCK_x & 0x01)) {
-                PUCK_x = PUCK_y >> 1;
+            if (!(PUCK_y & 0x01)) {
+                PUCK_y = PUCK_y >> 1;
             }
             break;
         default: //do nothing
@@ -97,7 +97,10 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
     static unsigned char prev_x;
     static unsigned char prev_y;
     
-    static unsigned char temp; //TEST
+    unsigned char input_x = 0x00;
+    unsigned char input_y = 0x00;
+    
+    static unsigned char temp = 0; //TEST
     
     switch (state) { //transitions
         case INIT_COORDINATE:
@@ -122,14 +125,26 @@ int Tick_Coordinate(int state) { // Get sensor input & puck position to create o
             output_y = 0x00;
             break;
         case CALCULATE_COORDINATE:
+            if (~(PINA) & 0x01) {
+                input_x = 0x01;
+            } else if (~(PINA) & 0x02) {
+                input_x = 0x02;
+            }
+            if (~(PINA) & 0x04) {
+                input_y = 0x01;
+            } else if (~(PINA) & 0x08) {
+                input_y = 0x02;
+            }
+            move(input_x, input_y);
+            output_x = PUCK_x;
+            output_y = PUCK_y;
             if (temp < 8) {
                 ++temp;
             } else {temp = 0;}
-            output_x = 0xFF;//PUCK_x << temp;
-            output_y = PUCK_y << temp;
+            //output_x = PUCK_x << temp;
+            //output_y = 0xFF;//PUCK_y << temp;
             prev_x = PUCK_x;
             prev_y = PUCK_y;
-            if (prev_x | prev_y) {}
             break;
         default:
             output_x = 0x00;
@@ -146,7 +161,6 @@ int Tick_LED8x8(int state) {
         case INIT_LED8x8:
             state = DISPLAY_LED8x8;
             LEDMatrix8x8_init();
-            ShiftReg_init();
             break;
         case DISPLAY_LED8x8:
             // stay in this state to continuously output to 8x8 LED matrix

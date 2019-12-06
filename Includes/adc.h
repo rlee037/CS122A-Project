@@ -33,7 +33,7 @@ unsigned char ADC_read(unsigned char channel) {
     
     ADMUX = 0x00;
     
-    return ADC;
+    return ADC >> 2;
 }
 
 void ADC_on(void) {
@@ -41,7 +41,7 @@ void ADC_on(void) {
     return;
 }
 
-void ADC_Off(void) {
+void ADC_off(void) {
     ADCSRA &= ~(1 << ADEN); //ADC Disable
     return;
 }

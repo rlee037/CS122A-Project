@@ -30,7 +30,7 @@
 
 void SPI_MasterInit(void) {
     // Set MOSI and SCK as output, all others as input
-    DDR_SPI = (1 << MOSI) | (1 << SCK);
+    DDR_SPI = (1 << MOSI) | (1 << SCK) | (1 << SS);
     
     // Enable SPI, Master, set clock rate fck/16, enable interrupts
     SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR0);// | (1 << SPIE);

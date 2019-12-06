@@ -25,22 +25,21 @@ void SensorMatrix_init() {
 }
 
 void SensorMatrix_getInput(unsigned char positions[]) { //position array should always contain 8 chars
-    /*
-    for (unsigned char i = 0; i < 8; ++i) {
+    for (unsigned char i = 0; i < 2; ++i) {
+        if (ADC_read(i) < 200) {PORTD |= (1 << i);}
+        else {PORTD &= ~(1 << i);}
+        /*
         PORT_CONTROL = (1 << i);
         for (unsigned char j = 0; j < 8; ++j) {
-            if (ADC_read(j) < 100) {
+            if (ADC_read(j) > 200) {
                 positions[i] |= (1 << j);
             } else {
                 positions[i] &= ~(1 << j);
             }
         }
+        */
     }
-    */
     
-    PORTD = 0x00;
-    unsigned char read = ADC_read(0) >> 2;
-    if (read != 0xFF) {PORTD = read;}
     
     return;
 }

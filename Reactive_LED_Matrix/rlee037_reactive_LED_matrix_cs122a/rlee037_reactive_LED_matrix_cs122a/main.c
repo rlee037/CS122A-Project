@@ -19,6 +19,7 @@
 #include "io.h"
 
 int main(void) {
+    DDRA = 0x00; PORTA = 0xFF; //Initialize PORTA for input
     
     unsigned char i = 0;
     tasks[i].state       = INIT_SENSOR;

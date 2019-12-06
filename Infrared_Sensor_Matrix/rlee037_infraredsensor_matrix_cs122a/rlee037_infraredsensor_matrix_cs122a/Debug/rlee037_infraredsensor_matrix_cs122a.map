@@ -10,12 +10,7 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text.ADC_on   0x00000000        0xc main.o
- .text.ADC_Off  0x00000000        0xc main.o
- .text.SensorMatrix_init
-                0x00000000       0x10 main.o
- .text.SensorMatrix_getInput
-                0x00000000       0x10 main.o
+ .text.ADC_off  0x00000000        0xc main.o
  .text          0x00000000        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
  .data          0x00000000        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
@@ -159,7 +154,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000       0xf4
+.text           0x00000000      0x156
  *(.vectors)
  .vectors       0x00000000       0x8c D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
                 0x00000000                __vector_default
@@ -255,15 +250,23 @@ END GROUP
                 0x0000009e        0xc main.o
                 0x0000009e                ADC_init
  .text.ADC_read
-                0x000000aa       0x34 main.o
+                0x000000aa       0x3c main.o
                 0x000000aa                ADC_read
- .text.main     0x000000de       0x12 main.o
-                0x000000de                main
-                0x000000f0                . = ALIGN (0x2)
+ .text.ADC_on   0x000000e6        0xc main.o
+                0x000000e6                ADC_on
+ .text.SensorMatrix_init
+                0x000000f2        0xc main.o
+                0x000000f2                SensorMatrix_init
+ .text.SensorMatrix_getInput
+                0x000000fe       0x1e main.o
+                0x000000fe                SensorMatrix_getInput
+ .text.main     0x0000011c       0x36 main.o
+                0x0000011c                main
+                0x00000152                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000000f0        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
-                0x000000f0                _exit
-                0x000000f0                exit
+ .fini9         0x00000152        0x0 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
+                0x00000152                _exit
+                0x00000152                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -282,11 +285,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000000f0        0x4 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
+ .fini0         0x00000152        0x4 d:/programs/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
  *(.fini0)
-                0x000000f4                _etext = .
+                0x00000156                _etext = .
 
-.data           0x00800100        0x0 load address 0x000000f4
+.data           0x00800100        0x0 load address 0x00000156
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -304,8 +307,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
-                0x000000f4                __data_load_start = LOADADDR (.data)
-                0x000000f4                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000156                __data_load_start = LOADADDR (.data)
+                0x00000156                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800100        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -384,34 +387,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x926
+.debug_info     0x00000000      0x972
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x792 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_info    0x00000792      0x194 main.o
+ .debug_info    0x00000792      0x1e0 main.o
 
-.debug_abbrev   0x00000000      0x82e
+.debug_abbrev   0x00000000      0x867
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x729 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_abbrev  0x00000729      0x105 main.o
+ .debug_abbrev  0x00000729      0x13e main.o
 
-.debug_line     0x00000000      0x324
+.debug_line     0x00000000      0x340
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x169 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_line    0x00000169      0x1bb main.o
+ .debug_line    0x00000169      0x1d7 main.o
 
-.debug_frame    0x00000000       0x84
+.debug_frame    0x00000000       0x94
  *(.debug_frame)
- .debug_frame   0x00000000       0x84 main.o
+ .debug_frame   0x00000000       0x94 main.o
 
-.debug_str      0x00000000      0x49b
+.debug_str      0x00000000      0x4ab
  *(.debug_str)
  .debug_str     0x00000000      0x296 D:/Programs/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_str     0x00000296      0x205 main.o
-                                0x23e (size before relaxing)
+ .debug_str     0x00000296      0x215 main.o
+                                0x249 (size before relaxing)
 
-.debug_loc      0x00000000       0x63
+.debug_loc      0x00000000       0xd6
  *(.debug_loc)
- .debug_loc     0x00000000       0x63 main.o
+ .debug_loc     0x00000000       0xd6 main.o
 
 .debug_macinfo
  *(.debug_macinfo)

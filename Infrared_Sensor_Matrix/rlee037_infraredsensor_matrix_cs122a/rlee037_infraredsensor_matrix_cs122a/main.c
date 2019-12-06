@@ -17,17 +17,15 @@
 
 int main(void)
 {
+    DDRA = 0x00; PORTA = 0xFF;
     DDRD = 0xFF; PORTD = 0x00;
-    //SensorMatrix_init();
+    SensorMatrix_init();
     
-    //unsigned char inputs[8] = {0x00};
-    
-    ADC_init();
+    unsigned char inputs[8] = {0x00};
     
     while (1) {
-        PORTD = 0x00;
-        PORTD = ADC_read(0);
-        //SensorMatrix_getInput(inputs);
+        //PORTD = ADC_read(0);
+        SensorMatrix_getInput(inputs);
         /*
         for (unsigned char i = 0; i < 8; ++i) {
 			if (inputs[i] != 0) {
