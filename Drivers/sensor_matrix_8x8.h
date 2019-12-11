@@ -3,7 +3,7 @@
  *   PINS ON SENSOR (https://learn.sparkfun.com/tutorials/qrd1114-optical-detector-hookup-guide)
  *    Pin 1: Connect to power through a 10k Ohm resistor. This pin also functions as the output of the sensor (connect to ADC input pin). Has dot on sensor.
  *    Pin 2: GND (on white side)
- *    Pin 3: VCC (connect to output pin). 
+ *    Pin 3: VCC through 330 Ohm resistor (connect to output pin).
  *    Pin 4: GND (on black side, opposite of pin 1)
  */
 
